@@ -22,7 +22,6 @@
     "jwt-decode": "^3.1.2",
     "mongoose": "^7.4.5"
     "node": ">=14.20.1"
-}
   },
   "devDependencies": {
     "install": "^0.13.0",
