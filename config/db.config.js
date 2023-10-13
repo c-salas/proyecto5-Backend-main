@@ -1,13 +1,13 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose"
 
 export const db = async () => {
-    try {
-        await mongoose.connect(process.env.DB_CONNECTION, {
-            useNewUrlParser: true,
-            useUnifiedTopoLogy: true
-        })
-        console.log('Connected to MongoDB!')
-    } catch (error) {
-        console.error('Error connecting to MongoDB :c', error)
+    // console.log (process.env.DB_NAME)
+    try  {
+        await mongoose.connect (process.env.DB_NAME, {useNewURLParser: true, useUnifiedTopology: true,});
+
+        console.log ("BD Conectada")
+    }
+    catch (error) {
+        console.error ("Error: ", error)
     }
 }

@@ -1,23 +1,16 @@
 import express from 'express'
-const router = express.Router()
+const router = express.Router ()
 
-import { deleteUserByRut, getAllUsers, getUserByRut, login, signUp, updateUser, verifyUser} from '../controllers/user.controller.js'
+import { signUp, login, deleteUser, getAllUsers, getUser, updateUser } from '../controllers/user.controller.js'
 import { authRequire } from '../middlewares/auth.middleware.js'
 
+//Le paso la ruta y el controlador
 
-router.get('/users',  getAllUsers)
-
-router.get('/users/:rut',  getUserByRut)
-
-router.post('/users', signUp)
-
-router.post('/login', login)
-
-router.get('/verify-token', authRequire, verifyUser)
-
-router.put('/users/:rut',  updateUser)
-
-router.delete('/users/:rut',  deleteUserByRut)
+router.post   ('/users', signUp)
+router.post   ('/login', login)
+router.get    ('/users', getAllUsers) 
+router.get    ('/users/:rut', authRequire, getUser)
+router.put    ('/users/:rut', authRequire, updateUser)
+router.delete ('/users/:rut', authRequire, deleteUser)
 
 export default router
-
