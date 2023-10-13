@@ -1,30 +1,26 @@
 import express from 'express';
-import cors from 'cors';
+import dotenv from 'dotenv';
 import userRouter from './routes/user.routes.js'
-import bookRouter from './routes/book.routes.js'
+import productRouter from './routes/product.routes.js'
 import { db } from './config/db.config.js'
-
-import dotenv from 'dotenv'
-import { corsOptions } from './middlewares/cors.middleware.js';
+import cors from 'cors'
 
 dotenv.config()
 
+const app = express();
 
-const app = express()
+// Midlewares
+app.use (cors())
+app.use (express.json())
+app.use (express.urlencoded({extended:true}))
 
-//Middlewares
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-//middlewares CORS
-app.use(cors(corsOptions));
-//Middlewares de rutas
-app.use('/api/v1', userRouter)
-app.use('/api/v1', bookRouter)
+// Midleware de rutas
+// Todas las rutas comenzarán con '/api/v1'
+app.use ('/api/v1', userRouter)
+app.use ('/api/v1', productRouter)
 
+db();
 
-db()
-
-
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port: ${process.env.PORT}`)
+app.listen (process.env.PORT, () => {
+    console.log (`Server está arriba en el puerto ${process.env.PORT}`) 
 })
